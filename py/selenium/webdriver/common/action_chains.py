@@ -20,6 +20,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from typing_extensions import Self
+
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.key_input import KeyInput
 from selenium.webdriver.common.actions.pointer_input import PointerInput
@@ -269,7 +271,7 @@ class ActionChains:
 
         return self
 
-    def pause(self, seconds: float | int) -> ActionChains:
+    def pause(self, seconds: float) -> ActionChains:
         """Pause all inputs for the specified duration in seconds."""
         self.w3c_actions.pointer_action.pause(seconds)
         self.w3c_actions.key_action.pause(int(seconds))
@@ -372,7 +374,7 @@ class ActionChains:
 
     # Context manager so ActionChains can be used in a 'with .. as' statements.
 
-    def __enter__(self) -> ActionChains:
+    def __enter__(self) -> Self:
         return self  # Return created instance of self.
 
     def __exit__(self, _type, _value, _traceback) -> None:
